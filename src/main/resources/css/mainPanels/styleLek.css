@@ -59,16 +59,44 @@
 
 .center-panel .blue-btn {
     -fx-background-color: #2980B9;
+    -fx-border-color: #64748B;
     -fx-text-fill: white;
+    -fx-border-radius: 5;
     -fx-background-radius: 5;
     -fx-pref-width: 150;
     -fx-font-size: 15px;
     -fx-padding: 20 0 20 0;
+    -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.08), 6, 0, 0, 2);
 }
 
 .center-panel .blue-btn:hover {
     -fx-background-color: #3498DB;
+    -fx-border-color: #64748B;
 }
+
+.search-box {
+    -fx-background-color: white;
+    -fx-border-color: #CBD5E1;
+    -fx-border-radius: 5;
+    -fx-background-radius: 5;
+    -fx-padding: 6 12 6 12;
+    -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.08), 6, 0, 0, 2);
+}
+
+.search-icon {
+    -fx-text-fill: #64748B;
+    -fx-font-size: 16px;
+}
+
+.search-field {
+    -fx-background-color: transparent;
+    -fx-border-color: transparent;
+    -fx-text-fill: #0F172A;
+    -fx-prompt-text-fill: #94A3B8;
+    -fx-font-size: 14px;
+    -fx-padding: 6 0 6 0;
+}
+
 
 /* PANEL PRAWY */
 .right-panel {

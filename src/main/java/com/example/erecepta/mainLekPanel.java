@@ -15,12 +15,12 @@ public class mainLekPanel {
     String password;
 
     //Zmienne lewego panelu
-    private Button nowaRecepta = new Button("NOWA E-RECEPTA");
-    private Button historia = new Button("Historia Pacjentów");
-    private Button mojeRecepty = new Button("Moje Recepty");
-    private Button ustawienia = new Button("Ustawienia");
-    private Button pomoc = new Button("Pomoc");
-    private Button wyloguj = new Button("Wyloguj");
+    private final Button nowaRecepta = new Button("NOWA E-RECEPTA");
+    private final Button historia = new Button("Historia Pacjentów");
+    private final Button mojeRecepty = new Button("Moje Recepty");
+    private final Button ustawienia = new Button("Ustawienia");
+    private final Button pomoc = new Button("Pomoc");
+    private final Button wyloguj = new Button("Wyloguj");
 
     //Zmienne środkowego panelu
     private Label title = new Label("Wystawianie E-Recepty");
@@ -31,9 +31,7 @@ public class mainLekPanel {
     private Label adresLabel = new Label("Adres:");
     private Label adresPacjenta = new Label("ul. Kwaitowa 5, Warszawa");
     private Label typReceptyLabel = new Label("Typ recepty");
-    private Button NowaRecepta = new Button("Nowa Recepta");
-    private Button wczytajBtn = new Button("Wczytaj");
-    private Button nowyPacjentBtn = new Button("Nowy Pacjent");
+    private Button wczytajBtn = new Button("Dodaj");
     private Button skalujBtn = new Button("Skaluj!");
     private Button dodajLekBtn = new Button("Dodaj Lek");
     private TextField searchField = new TextField();
@@ -95,16 +93,36 @@ public class mainLekPanel {
         /*
            ŚRODKOWA KOLUMNA - FORMULARZ
         */
-        HBox searchBox = new HBox(10);
-        searchBox.getChildren().addAll(
-                searchField,
-                wczytajBtn,
-                nowyPacjentBtn
+        HBox titleBox = new HBox(10);
+        titleBox.setAlignment(Pos.CENTER);
+        titleBox.getChildren().addAll(
+                title
+        );
+
+
+        Label searchIcon = new Label("\uD83D\uDD0D"); // 🔍
+        searchIcon.getStyleClass().add("search-icon");
+
+        HBox searchBox = new HBox(8);
+        searchField.setPromptText("Wyszukaj Pacjenta (PESEL / Imię i Nazwisko)");
+        searchBox.getChildren().addAll(searchIcon, searchField);
+        searchBox.getStyleClass().add("search-box");
+        searchBox.setAlignment(Pos.CENTER_LEFT);
+
+        HBox.setHgrow(searchField, Priority.ALWAYS);
+        searchField.setMaxWidth(Double.MAX_VALUE);
+        HBox.setHgrow(searchBox, Priority.ALWAYS);
+        searchField.setMaxWidth(Double.MAX_VALUE);
+
+        HBox topBox = new HBox(10);
+        topBox.setAlignment(Pos.CENTER);
+        topBox.getChildren().addAll(
+                searchBox,
+                wczytajBtn
         );
         //searchBox.setAlignment(Pos.CENTER);
         VBox centerPanel = new VBox(20);
         HBox lekBox = new HBox(10);
-
 
         /* Dane pacjenta */
         GridPane danePacjenta = new GridPane();
@@ -115,7 +133,6 @@ public class mainLekPanel {
         danePacjenta.add(adresLabel, 0, 2);
         danePacjenta.add(adresPacjenta, 1, 2);
 
-        searchField.setPromptText("Wyszukaj Pacjenta (PESEL / Imię i Nazwisko)");
         lekField.setPromptText("Wyszukaj lek...");
 
         centerPanel.getStyleClass().add("center-panel");
@@ -124,20 +141,20 @@ public class mainLekPanel {
         typReceptyLabel.getStyleClass().add("subtitle");
         danePacjenta.getStyleClass().add("dane-pacjenta");
         dodajLekBtn.getStyleClass().add("blue-btn");
+        searchField.getStyleClass().add("search-field");
+
+        centerPanel.getChildren().addAll(
+                titleBox,
+                topBox, new Separator(),
+                danePacjenta, new Separator(),
+                typReceptyLabel,
+                lekBox
+        );
 
         lekBox.getChildren().addAll(
                 lekField,
                 skalujBtn,
                 dodajLekBtn
-        );
-
-
-        centerPanel.getChildren().addAll(
-                title,
-                searchBox, new Separator(),
-                danePacjenta, new Separator(),
-                typReceptyLabel,
-                lekBox
         );
 
 
