@@ -52,17 +52,18 @@ public class logika extends Application {
                 String imie = log1.getImie(login);
                 String nazwisko = log1.getNazwisko(login);
 
-                mainLekPanel mainPanel = new mainLekPanel(imie, nazwisko, login, password); //Na razie przeniesione tu puki nie ma innych paneli
-
                 switch (mode) {
                     case 1:
-                        mainPanel.start(primaryStage);
+                        mainPacPanel mainPanelPac = new mainPacPanel(imie, nazwisko, login, password);
+                        mainPanelPac.start(primaryStage);
                         break;
                     case 2:
-                        mainPanel.start(primaryStage);
+                        mainPacPanel mainPanelAdm = new mainPacPanel(imie, nazwisko, login, password);
+                        mainPanelAdm.start(primaryStage);
                         break;
                     case 3:
-                        mainPanel.start(primaryStage);
+                        mainLekPanel mainPanelLek = new mainLekPanel(imie, nazwisko, login, password);
+                        mainPanelLek.start(primaryStage);
                         break;
                     default:
                         Alert alert = new Alert(Alert.AlertType.WARNING);
