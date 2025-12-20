@@ -19,7 +19,8 @@ public class mainPacPanel {
 
     private Label warningTestLabel1 = new Label("Recepta 1 kończy się za 2 dni!");
     private Label warningTestLabel2 = new Label("Recepta 2 kończy się za 4 dni!");
-    private Button nowaRecepta = new Button("Nowa e-recepta");
+    private Label notificationLabel1 = new Label("Otrzymano nową ereceptę!");
+    private Label notificationLabel2 = new Label("Otrzymano nową ereceptę!");
 
     //Guziki z panelem z guziczkami
     private Label szybkiDostepLabel = new Label("Szybki dostęp");
@@ -28,8 +29,7 @@ public class mainPacPanel {
     private Button nadchodzaceWizyty = new Button("Nadchodzace wizyty");
     private Button dawkowanie = new Button("Dawkowanie");
 
-    private Label aktywneReceptyLabel = new Label("Aktywne e-recepty");
-
+    private final Button wyloguj = new Button("Wyloguj");
 
     mainPacPanel(String login, String password, String imie, String nazwisko) {
         this.login = login;
@@ -40,52 +40,191 @@ public class mainPacPanel {
 
     public void start(Stage primaryStage) {
 
-        VBox root = new VBox();
+        VBox root = new VBox(1);
+        root.getStyleClass().add("main-panel");
 
+        /*
+        Panel górny który zawiera ikonki, powiadomienia oraz nazwę profilu użytkownika
+         */
         Label imieNazwisko = new Label(imie + " " + nazwisko);
-
-        HBox nameBox = new HBox();
-        nameBox.setAlignment(Pos.CENTER_LEFT);
-        nameBox.getChildren().addAll(
-            imieNazwisko
+        Image profileImage = new Image(
+                getClass().getResourceAsStream("/icons/profile.png")
         );
 
+        ImageView profileIcon = new ImageView(profileImage);
+        profileIcon.setFitWidth(50);
+        profileIcon.setFitHeight(50);
+        profileIcon.setPreserveRatio(true);
+
+        HBox nameBox = new HBox(20);
+        nameBox.setAlignment(Pos.CENTER_LEFT);
+        nameBox.getStyleClass().add("nameBox");
+        nameBox.getChildren().addAll(
+                profileIcon,
+                imieNazwisko
+        );
+
+        /*
+        Kolejny panel górny który zawiera powiadomienia oraz przycisk do wypisywania e-recepty
+         */
         Label[] warningLabel = new Label[]{
                 warningTestLabel1,
                 warningTestLabel2
         };
+        VBox warningsBox = new VBox(10);
+        for (int i = 0; i < warningLabel.length; i++) {
+            HBox warningBox = new HBox(10);
+            warningBox.setAlignment(Pos.CENTER_LEFT);
+            warningBox.getStyleClass().add("warningBox");
+            Image alertImage = new Image(
+                    getClass().getResourceAsStream("/icons/alert.png")
+            );
 
-        VBox receptyBox = new VBox();
+            ImageView alertIcon = new ImageView(alertImage);
+            alertIcon.setFitWidth(15);
+            alertIcon.setFitHeight(15);
+            alertIcon.setPreserveRatio(true);
+            warningBox.getChildren().addAll(alertIcon, warningLabel[i]);
+            warningsBox.getChildren().add(warningBox);
+        }
+
+        //Dodanie ładnego przycisksu nowej recepty
+        Label[] notificationLabel = new Label[]{
+                notificationLabel1,
+                notificationLabel2
+        };
+        VBox nowaReceptaBox = new VBox(10);
+        for (int i = 0; i < warningLabel.length; i++) {
+            HBox nowaReceptaView = new HBox(10);
+            nowaReceptaView.setMaxWidth(Double.MAX_VALUE);
+            HBox.setHgrow(nowaReceptaView, Priority.ALWAYS);
+            nowaReceptaView.setAlignment(Pos.CENTER_LEFT);
+            nowaReceptaView.getStyleClass().add("nowaReceptaBox");
+            Image newDocumentImage = new Image(
+                    getClass().getResourceAsStream("/icons/new-document.png")
+            );
+
+            ImageView newDocumentIcon = new ImageView(newDocumentImage);
+            newDocumentIcon.setFitWidth(15);
+            newDocumentIcon.setFitHeight(15);
+            newDocumentIcon.setPreserveRatio(true);
+            nowaReceptaView.getChildren().addAll(newDocumentIcon, notificationLabel[i]);
+            nowaReceptaBox.getChildren().add(nowaReceptaView);
+        }
+
+        VBox receptyBox = new VBox(20);
         receptyBox.setAlignment(Pos.CENTER_LEFT);
+        receptyBox.getStyleClass().add("receptyBox");
         receptyBox.getChildren().addAll(
-                warningLabel
+                warningsBox,new Separator(),
+                nowaReceptaBox
         );
-        receptyBox.getChildren().add(nowaRecepta);
 
-        VBox szybkiDostepBox = new VBox();
-        szybkiDostepBox.setAlignment(Pos.CENTER_LEFT);
-        szybkiDostepBox.getChildren().add(szybkiDostepLabel);
+        //Dodanie środkowego panelu z guziczkami
+        VBox mainButtonBox = new VBox();
+        mainButtonBox.getStyleClass().add("mainButtonBox");
+        mainButtonBox.setAlignment(Pos.TOP_CENTER);
 
-        GridPane buttonPanel = new GridPane();
-        buttonPanel.setAlignment(Pos.CENTER);
-        buttonPanel.add(wizyta, 0, 0);
-        buttonPanel.add(nadchodzaceWizyty, 1, 0);
-        buttonPanel.add(historia, 0, 1);
-        buttonPanel.add(dawkowanie, 1, 1);
 
-        VBox aktywneReceptyBox = new VBox();
-        szybkiDostepBox.setAlignment(Pos.CENTER_LEFT);
-        szybkiDostepBox.getChildren().add(aktywneReceptyLabel);
+        Image calendarImage = new Image(
+                getClass().getResourceAsStream("/icons/calendar.png")
+        );
 
+        ImageView calendarIcon = new ImageView(calendarImage);
+        calendarIcon.setFitWidth(40);
+        calendarIcon.setFitHeight(40);
+        calendarIcon.setPreserveRatio(true);
+
+        Image scheduleImage = new Image(
+                getClass().getResourceAsStream("/icons/schedule.png")
+        );
+
+        ImageView scheduleIcon = new ImageView(scheduleImage);
+        scheduleIcon.setFitWidth(40);
+        scheduleIcon.setFitHeight(40);
+        scheduleIcon.setPreserveRatio(true);
+
+        Image medicineImage = new Image(
+                getClass().getResourceAsStream("/icons/medicine.png")
+        );
+
+        ImageView medicineIcon = new ImageView(medicineImage);
+        medicineIcon.setFitWidth(40);
+        medicineIcon.setFitHeight(40);
+        medicineIcon.setPreserveRatio(true);
+
+        Image historyImage = new Image(
+                getClass().getResourceAsStream("/icons/history.png")
+        );
+
+        ImageView historyIcon = new ImageView(historyImage);
+        historyIcon.setFitWidth(40);
+        historyIcon.setFitHeight(40);
+        historyIcon.setPreserveRatio(true);
+
+        GridPane mainButtonPanel = new GridPane();
+        ColumnConstraints col1 = new ColumnConstraints();
+        col1.setHalignment(HPos.RIGHT);
+        col1.setPercentWidth(50);
+        col1.setHalignment(HPos.RIGHT);
+        ColumnConstraints col2 = new ColumnConstraints();
+        col2.setHgrow(Priority.ALWAYS);
+        col2.setFillWidth(true);
+        mainButtonPanel.getColumnConstraints().addAll(col1, col2);
+
+        mainButtonPanel.setHgap(16);
+        mainButtonPanel.setVgap(16);
+        mainButtonPanel.setPadding(new Insets(20));
+
+        wizyta.setGraphic(calendarIcon);
+        nadchodzaceWizyty.setGraphic(scheduleIcon);
+        historia.setGraphic(historyIcon);
+        dawkowanie.setGraphic(medicineIcon);
+        wizyta.setGraphicTextGap(10);
+        nadchodzaceWizyty.setGraphicTextGap(10);
+        historia.setGraphicTextGap(10);
+        dawkowanie.setGraphicTextGap(10);
+
+        mainButtonPanel.setAlignment(Pos.TOP_CENTER);
+        mainButtonPanel.add(wizyta, 0, 0);
+        mainButtonPanel.add(nadchodzaceWizyty, 1, 0);
+        mainButtonPanel.add(historia, 0, 1);
+        mainButtonPanel.add(dawkowanie, 1, 1);
+
+        wizyta.setMaxWidth(Double.MAX_VALUE);
+        nadchodzaceWizyty.setMaxWidth(Double.MAX_VALUE);
+        historia.setMaxWidth(Double.MAX_VALUE);
+        dawkowanie.setMaxWidth(Double.MAX_VALUE);
+        wizyta.setMaxHeight(150);
+        nadchodzaceWizyty.setMaxHeight(150);
+        historia.setMaxHeight(150);
+        dawkowanie.setMaxHeight(150);
+        GridPane.setVgrow(wizyta, Priority.NEVER);
+        GridPane.setVgrow(nadchodzaceWizyty, Priority.NEVER);
+        GridPane.setVgrow(historia, Priority.NEVER);
+        GridPane.setVgrow(dawkowanie, Priority.NEVER);
+        GridPane.setHgrow(wizyta, Priority.ALWAYS);
+        GridPane.setHgrow(nadchodzaceWizyty, Priority.ALWAYS);
+        GridPane.setHgrow(historia, Priority.ALWAYS);
+        GridPane.setHgrow(dawkowanie, Priority.ALWAYS);
+
+        mainButtonBox.getChildren().add(
+                mainButtonPanel
+        );
+
+        HBox wylogujBox = new HBox();
+        wylogujBox.setAlignment(Pos.CENTER_RIGHT);
+        wylogujBox.getStyleClass().add("wylogujBox");
+        wylogujBox.getChildren().add(wyloguj);
         /*
            SCENA
         */
+        root.setAlignment(Pos.TOP_CENTER);
         root.getChildren().addAll(
-                nameBox,
-                receptyBox,
-                szybkiDostepBox,
-                buttonPanel,
-                aktywneReceptyBox
+                nameBox, new Separator(),
+                receptyBox, new Separator(),
+                mainButtonBox, new Separator(),
+                wylogujBox
         );
         Scene scene = new Scene(root, 1300, 780); //1300, 780
         scene.getStylesheets().add(
@@ -95,6 +234,11 @@ public class mainPacPanel {
         primaryStage.setTitle("E-Recepta");
         primaryStage.setScene(scene);
         primaryStage.show();
+
+        wyloguj.setOnAction(e -> {
+            logika mainPane = new logika();
+            mainPane.start(primaryStage);
+        });
 
     }
 }
