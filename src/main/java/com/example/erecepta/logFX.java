@@ -29,7 +29,6 @@ public class logFX{
     private Button wyjdz = new Button("Wyjdz");
     private Button zalogujPacjent = new Button("Zaloguj jako pacjent");
     private Button zalogujLekarz = new Button("Zaloguj jako lekarz");
-    private Button zalogujAdmin = new Button("Zaloguj jako admin");
     private Button stworzKontoPacjenta = new Button("stworz konto Pacjenta");
     private Button stwórzKontoLekarza = new Button("Stwórz konto Lekarza");
 
@@ -82,18 +81,15 @@ public class logFX{
         leftPanel.setAlignment(Pos.CENTER);
         zalogujPacjent.setMaxWidth(Double.MAX_VALUE);
         zalogujLekarz.setMaxWidth(Double.MAX_VALUE);
-        zalogujAdmin.setMaxWidth(Double.MAX_VALUE);
         stworzKontoPacjenta.setMaxWidth(Double.MAX_VALUE);
         stwórzKontoLekarza.setMaxWidth(Double.MAX_VALUE);
         HBox.setHgrow(zalogujPacjent, Priority.ALWAYS);
         HBox.setHgrow(zalogujLekarz, Priority.ALWAYS);
-        HBox.setHgrow(zalogujAdmin, Priority.ALWAYS);
         HBox.setHgrow(stworzKontoPacjenta, Priority.ALWAYS);
         HBox.setHgrow(stwórzKontoLekarza, Priority.ALWAYS);
         leftPanel.getChildren().addAll(
                 zalogujPacjent,
                 zalogujLekarz,
-                zalogujAdmin,
                 stworzKontoPacjenta,
                 stwórzKontoLekarza
         );
@@ -175,16 +171,6 @@ public class logFX{
             chosenMode = 1;
         });
 
-        zalogujAdmin.setOnAction(e -> {
-            Alert alert = new Alert(Alert.AlertType.INFORMATION);
-            alert.setTitle("LOGOWANIE");
-            alert.setHeaderText(null);
-            alert.setContentText("Logujesz się jako Admin");
-            alert.showAndWait();
-            mode.setText("Zaloguj jako Admin");
-            chosenMode = 2;
-        });
-
         zalogujLekarz.setOnAction(e -> {
             Alert alert = new Alert(Alert.AlertType.INFORMATION);
             alert.setTitle("LOGOWANIE");
@@ -192,7 +178,15 @@ public class logFX{
             alert.setContentText("Logujesz się jako Lekarz");
             alert.showAndWait();
             mode.setText("Zaloguj jako Lekarz");
+            chosenMode = 2;
+        });
+
+        stworzKontoPacjenta.setOnAction(e -> {
             chosenMode = 3;
+        });
+
+        stwórzKontoLekarza.setOnAction(e -> {
+            chosenMode = 4;
         });
     }
 
