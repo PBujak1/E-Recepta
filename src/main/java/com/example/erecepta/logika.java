@@ -66,7 +66,7 @@ public class logika extends Application {
                             mainPacPanel mainPanelPac = new mainPacPanel(imie, nazwisko, nazwaPacjenta);
                             mainPanelPac.start(primaryStage);
                         } catch (IOException ex) {
-                            throw new RuntimeException(ex);
+                            new Alert(Alert.AlertType.WARNING, "Nie udało się pobrać danych pacjenta!").showAndWait();
                         }
                         break;
                     case 2:
