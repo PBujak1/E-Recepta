@@ -7,6 +7,7 @@ import javafx.scene.control.TextField;
 import javafx.stage.Stage;
 
 import java.io.IOException;
+import java.util.Objects;
 
 public class logika extends Application {
 
@@ -57,14 +58,21 @@ public class logika extends Application {
 
                 ServerConnection serverConnection = new ServerConnection(login, password);
 
+
                 switch (mode) {
                     case 1:
                         try {
+                            String result = serverConnection.getPacjent("loginPacjent");
+                            if ("BRAK_DANYCH".equals(result)) {
+                                new Alert(Alert.AlertType.WARNING, "Błędny login lub hasło").showAndWait();
+                                return;
+                            } else {
                             imie = serverConnection.getPacjent(getImie);
                             nazwisko = serverConnection.getPacjent(getNazwisko);
-                            nazwaPacjenta = imie + nazwisko;
+                            nazwaPacjenta = imie + " " + nazwisko;
                             mainPacPanel mainPanelPac = new mainPacPanel(imie, nazwisko, nazwaPacjenta);
                             mainPanelPac.start(primaryStage);
+                            }
                         } catch (IOException ex) {
                             new Alert(Alert.AlertType.WARNING, "Nie udało się pobrać danych pacjenta!").showAndWait();
                         }

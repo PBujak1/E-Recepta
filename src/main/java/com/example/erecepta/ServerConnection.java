@@ -26,6 +26,21 @@ public class ServerConnection {
             PrintWriter out = new PrintWriter(socket.getOutputStream(), true);
 
             switch (data){
+                case "loginPacjent":
+                    out.println("loginPacjent");
+                    out.println(PESEL);
+                    out.println(haslo);
+
+                    String response = in.readLine();
+
+                    if ("BRAK_DANYCH".equals(response)) {
+                        return "BRAK_DANYCH";
+                    }
+
+                    String imie = response;
+                    String nazwisko = in.readLine();
+
+                    return imie + " " + nazwisko;
                 case "getImie":
                     out.println(data);
                     out.println(PESEL);
