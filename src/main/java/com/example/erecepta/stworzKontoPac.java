@@ -34,7 +34,7 @@ public class stworzKontoPac {
     public TextField textPesel = new TextField();
     public DatePicker dateUrodzenia = new DatePicker();
     public TextField textAdres = new TextField();
-
+xxx
     public TextField textTelefon = new TextField();
     public TextField textEmail = new TextField();
 
