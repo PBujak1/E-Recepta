@@ -86,14 +86,6 @@ public class logika extends Application {
                             throw new RuntimeException(ex);
                         }
                         break;
-                    case 3:
-                        stworzKontoPac stworzKontoPac = new stworzKontoPac();
-                        stworzKontoPac.start(primaryStage);
-                        break;
-                    case 4:
-                        stworzKontoLek stworzKontoLek = new stworzKontoLek();
-                        stworzKontoLek.start(primaryStage);
-                        break;
                     default:
                         Alert alert = new Alert(Alert.AlertType.WARNING);
                         alert.setContentText("Błąd wczytywania danych!");

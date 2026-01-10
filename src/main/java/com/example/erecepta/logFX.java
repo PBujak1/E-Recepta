@@ -182,11 +182,13 @@ public class logFX{
         });
 
         stworzKontoPacjenta.setOnAction(e -> {
-            chosenMode = 3;
+            stworzKontoPac stworzKontoPac = new stworzKontoPac();
+            stworzKontoPac.start(primaryStage);
         });
 
         stwórzKontoLekarza.setOnAction(e -> {
-            chosenMode = 4;
+            stworzKontoLek stworzKontoLek = new stworzKontoLek();
+            stworzKontoLek.start(primaryStage);
         });
     }
 
