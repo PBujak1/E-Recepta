@@ -3,132 +3,112 @@ package com.example.erecepta;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.Scene;
-import javafx.scene.control.DatePicker;
-import javafx.scene.control.Label;
-import javafx.scene.control.TextField;
-import javafx.scene.layout.GridPane;
-import javafx.scene.layout.VBox;
+import javafx.scene.control.*;
+import javafx.scene.layout.*;
 import javafx.scene.text.Font;
 import javafx.stage.Stage;
 
 public class stworzKontoPac {
 
-    // ===== Dane osobowe =====
-    private Label labelTitle = new Label("Tworzenie konta");
-    private Label labelDane = new Label("Dane osobowe");
-
-    private Label labelImie = new Label("Imię");
-    private Label labelNazwisko = new Label("Nazwisko");
-    private Label labelPesel = new Label("PESEL");
-    private Label labelData = new Label("Data urodzenia");
-    private Label labelAdres = new Label("Adres zamieszkania");
-
-    // ===== Kontakt =====
-    private Label labelKontakt = new Label("Kontakt");
-    private Label labelTelefon = new Label("Numer telefonu");
-    private Label labelEmail = new Label("Adres e-mail");
-
-    // ===== Pola =====
     public TextField textImie = new TextField();
     public TextField textNazwisko = new TextField();
     public TextField textPesel = new TextField();
     public DatePicker dateUrodzenia = new DatePicker();
     public TextField textAdres = new TextField();
-xxx
     public TextField textTelefon = new TextField();
     public TextField textEmail = new TextField();
+    public PasswordField textHaslo = new PasswordField();
 
     public void start(Stage primaryStage) {
 
+        // ===== Nagłówek =====
+        Label appTitle = new Label("E-recepta");
+        appTitle.setFont(Font.font("Arial", 22));
+
+        Label welcome = new Label("Stwórz konto Pacjenta");
+        welcome.setFont(Font.font("Arial", 36));
+
+        VBox header = new VBox(10, appTitle, welcome);
+        header.setAlignment(Pos.CENTER);
+
+        // ===== KARTA FORMULARZA =====
+        VBox card = new VBox(20);
+        card.setPadding(new Insets(30));
+        card.setMaxWidth(1000);
+        card.setAlignment(Pos.CENTER);
+
+        card.getStyleClass().add("login-card"); // pod CSS
+
+        Label cardTitle = new Label("Dane pacjenta");
+        cardTitle.setFont(Font.font("Arial", 24));
+
         // Placeholdery
-        textImie.setPromptText("Np. Jan");
-        textNazwisko.setPromptText("Np. Kowalski");
-        textPesel.setPromptText("11 cyfr");
-        textAdres.setPromptText("Ulica, numer domu, miasto, kod pocztowy");
-        textTelefon.setPromptText("000 000 000");
-        textEmail.setPromptText("pacjent@przyklad.pl");
+        textImie.setPromptText("Imię");
+        textNazwisko.setPromptText("Nazwisko");
+        textPesel.setPromptText("PESEL");
+        textAdres.setPromptText("Adres zamieszkania");
+        textTelefon.setPromptText("Numer telefonu");
+        textEmail.setPromptText("Adres e-mail");
+        textHaslo.setPromptText("Hasło");
 
-        // Nagłówki
-        labelTitle.setFont(Font.font("Manrope", 32));
-        labelDane.setFont(Font.font("Manrope", 26));
-        labelKontakt.setFont(Font.font("Manrope", 26));
+        // ===== Grid formularza =====
+        GridPane grid = new GridPane();
+        grid.setHgap(25);
+        grid.setVgap(20);
 
-        // ===== Grid dane osobowe =====
-        GridPane daneGrid = new GridPane();
-        daneGrid.setHgap(30);
-        daneGrid.setVgap(20);
+        grid.add(new Label("Imię:"), 0, 0);
+        grid.add(textImie, 1, 0);
 
-        daneGrid.add(labelImie, 0, 0);
-        daneGrid.add(textImie, 0, 1);
+        grid.add(new Label("Nazwisko:"), 2, 0);
+        grid.add(textNazwisko, 3, 0);
 
-        daneGrid.add(labelNazwisko, 1, 0);
-        daneGrid.add(textNazwisko, 1, 1);
+        grid.add(new Label("PESEL:"), 0, 1);
+        grid.add(textPesel, 1, 1);
 
-        daneGrid.add(labelPesel, 0, 2);
-        daneGrid.add(textPesel, 0, 3);
+        grid.add(new Label("Data urodzenia:"), 2, 1);
+        grid.add(dateUrodzenia, 3, 1);
 
-        daneGrid.add(labelData, 1, 2);
-        daneGrid.add(dateUrodzenia, 1, 3);
+        grid.add(new Label("Adres:"), 0, 2);
+        grid.add(textAdres, 1, 2, 3, 1);
 
-        daneGrid.add(labelAdres, 0, 4, 2, 1);
-        daneGrid.add(textAdres, 0, 5, 2, 1);
+        grid.add(new Label("Telefon:"), 0, 3);
+        grid.add(textTelefon, 1, 3);
 
-        // ===== Grid kontakt =====
-        GridPane kontaktGrid = new GridPane();
-        kontaktGrid.setHgap(30);
-        kontaktGrid.setVgap(20);
+        grid.add(new Label("E-mail:"), 2, 3);
+        grid.add(textEmail, 3, 3);
 
-        kontaktGrid.add(labelTelefon, 0, 0);
-        kontaktGrid.add(textTelefon, 0, 1);
+        grid.add(new Label("Hasło:"), 0, 4);
+        grid.add(textHaslo, 1, 4);
 
-        kontaktGrid.add(labelEmail, 1, 0);
-        kontaktGrid.add(textEmail, 1, 1);
+        // ===== Przyciski =====
+        Button btnWyczysc = new Button("Wyczyść");
+        Button btnZarejestruj = new Button("Utwórz konto");
 
-        // ===== Root =====
-        VBox root = new VBox(30);
+        btnWyczysc.setPrefHeight(45);
+        btnZarejestruj.setPrefHeight(45);
+
+        btnWyczysc.setPrefWidth(200);
+        btnZarejestruj.setPrefWidth(400);
+
+        HBox buttons = new HBox(20, btnWyczysc, btnZarejestruj);
+        buttons.setAlignment(Pos.CENTER);
+
+        card.getChildren().addAll(cardTitle, grid, buttons);
+
+        // ===== ROOT =====
+        VBox root = new VBox(40, header, card);
         root.setPadding(new Insets(30));
-        root.setAlignment(Pos.TOP_LEFT);
+        root.setAlignment(Pos.TOP_CENTER);
 
-        root.getChildren().addAll(
-                labelTitle,
-                labelDane,
-                daneGrid,
-                labelKontakt,
-                kontaktGrid
+        Scene scene = new Scene(root, 1300, 780);
+
+        // Twój CSS
+        scene.getStylesheets().add(
+                getClass().getResource("/css/mainPanels/styleLek.css").toExternalForm()
         );
-
-        Scene scene = new Scene(root, 1300, 780); // jak w Twoim kodzie
-
-        // CSS jeśli masz
-        // scene.getStylesheets().add(getClass().getResource("/css/mainPanels/styleLek.css").toExternalForm());
 
         primaryStage.setTitle("E-Recepta");
         primaryStage.setScene(scene);
         primaryStage.show();
-    }
-
-    // gettery jak u Ciebie
-    public String getImie() {
-        return textImie.getText();
-    }
-
-    public String getNazwisko() {
-        return textNazwisko.getText();
-    }
-
-    public String getPesel() {
-        return textPesel.getText();
-    }
-
-    public String getAdres() {
-        return textAdres.getText();
-    }
-
-    public String getTelefon() {
-        return textTelefon.getText();
-    }
-
-    public String getEmail() {
-        return textEmail.getText();
     }
 }
