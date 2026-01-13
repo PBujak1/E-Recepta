@@ -330,11 +330,11 @@ public class mainLekPanel {
                 email.setText(email1);
 
                 nowaRecepta.setOnAction(a -> {
-                    nowaRecepta Recepta = new nowaRecepta(imie, nazwisko, PESEL);
+                    nowaRecepta Recepta = new nowaRecepta(imie1, nazwisko1, PESEL);
                     Recepta.start(primaryStage);
 
                     Recepta.getWyjdzBtn().setOnAction(a1 -> {
-                        mainLekPanel mainPanelLek = new mainLekPanel(imie, nazwisko, PESEL, password);
+                        mainLekPanel mainPanelLek = new mainLekPanel(login, password, imie, nazwisko);
                         mainPanelLek.start(primaryStage);
                     });
                 });
@@ -347,4 +347,6 @@ public class mainLekPanel {
     public Button getPokazPac() { return wczytajBtn; }
 
     public Button getUstawieniaLek() { return ustawienia; }
+
+    public Button getPomoc() { return pomoc; }
 }

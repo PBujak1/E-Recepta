@@ -85,8 +85,17 @@ public class logika extends Application {
                             String wiek1 = serverConnection.getPacjent("getWiek", PESEL);
                             String plec1 = serverConnection.getPacjent("getPlec", PESEL);
                             nazwaPacjenta = imie + nazwisko;
-                            mainLekPanel mainPanelLek = new mainLekPanel(imie, nazwisko, PESEL, password);
+                            mainLekPanel mainPanelLek = new mainLekPanel(PESEL, password, imie, nazwisko);
                             mainPanelLek.start(primaryStage);
+
+                            mainPanelLek.getPomoc().setOnAction(e1 -> {
+                                        pomoc pomocPanel = new pomoc();
+                                        pomocPanel.start(primaryStage);
+
+                                        pomocPanel.getWyjdz().setOnAction(a -> {
+                                            mainPanelLek.start(primaryStage);
+                                        });
+                            });
 
                             mainPanelLek.getUstawieniaLek().setOnAction(a->{
                                 ustawieniaLek ustawieniaLekarz = new ustawieniaLek(
