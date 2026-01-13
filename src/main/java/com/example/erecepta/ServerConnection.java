@@ -76,6 +76,20 @@ public class ServerConnection {
                     response = in.readLine();
                     System.out.println(response);
                     return response;
+                case "getPlec":
+                    out.println(data);
+                    out.println(PESEL);
+
+                    response = in.readLine();
+                    System.out.println(response);
+                    return response;
+                case "getWiek":
+                    out.println(data);
+                    out.println(PESEL);
+
+                    response = in.readLine();
+                    System.out.println(response);
+                    return response;
                 default:
                     response = "Valid request!";
                     System.out.println(response);

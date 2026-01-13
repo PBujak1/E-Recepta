@@ -313,19 +313,31 @@ public class mainLekPanel {
         wczytajBtn.setOnAction(e -> {
             try {
                 String PESEL = searchField.getText();
-                String imie = serverConnection.getPacjent("getImie", PESEL);
-                String nazwisko = serverConnection.getPacjent("getNazwisko", PESEL);
+                String imie1 = serverConnection.getPacjent("getImie", PESEL);
+                String nazwisko1 = serverConnection.getPacjent("getNazwisko", PESEL);
                 String adres1 = serverConnection.getPacjent("getAdres", PESEL);
                 String telefon1 = serverConnection.getPacjent("getTelefon", PESEL);
                 String email1 = serverConnection.getPacjent("getEmail", PESEL);
+                String wiek1 = serverConnection.getPacjent("getWiek", PESEL);
+                String plec1 = serverConnection.getPacjent("getPlec", PESEL);
 
-                imieINazwiskoPacjenta.setText(imie + " " + nazwisko);
+                imieINazwiskoPacjenta.setText(imie1 + " " + nazwisko1);
                 PESELPacjenta.setText(PESEL);
                 adresPacjenta.setText(adres1);
-                plec.setText("Kobieta");
-                wiek.setText("35");
+                plec.setText(plec1);
+                wiek.setText(wiek1);
                 telefon.setText(telefon1);
                 email.setText(email1);
+
+                nowaRecepta.setOnAction(a -> {
+                    nowaRecepta Recepta = new nowaRecepta(imie, nazwisko, PESEL);
+                    Recepta.start(primaryStage);
+
+                    Recepta.getWyjdzBtn().setOnAction(a1 -> {
+                        mainLekPanel mainPanelLek = new mainLekPanel(imie, nazwisko, PESEL, password);
+                        mainPanelLek.start(primaryStage);
+                    });
+                });
             } catch (IOException ex) {
                 throw new RuntimeException(ex);
             }
