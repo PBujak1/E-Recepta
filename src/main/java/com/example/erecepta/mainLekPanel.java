@@ -345,4 +345,6 @@ public class mainLekPanel {
     }
 
     public Button getPokazPac() { return wczytajBtn; }
+
+    public Button getUstawieniaLek() { return ustawienia; }
 }

@@ -79,9 +79,28 @@ public class logika extends Application {
                         try {
                             imie = serverConnection.getPacjent(getImie, PESEL);
                             nazwisko = serverConnection.getPacjent(getNazwisko, PESEL);
+                            String adres1 = serverConnection.getPacjent("getAdres", PESEL);
+                            String telefon1 = serverConnection.getPacjent("getTelefon", PESEL);
+                            String email1 = serverConnection.getPacjent("getEmail", PESEL);
+                            String wiek1 = serverConnection.getPacjent("getWiek", PESEL);
+                            String plec1 = serverConnection.getPacjent("getPlec", PESEL);
                             nazwaPacjenta = imie + nazwisko;
                             mainLekPanel mainPanelLek = new mainLekPanel(imie, nazwisko, PESEL, password);
                             mainPanelLek.start(primaryStage);
+
+                            mainPanelLek.getUstawieniaLek().setOnAction(a->{
+                                ustawieniaLek ustawieniaLekarz = new ustawieniaLek(
+                                        imie,
+                                        nazwisko,
+                                        PESEL,
+                                        adres1,
+                                        telefon1,
+                                        email1,
+                                        wiek1,
+                                        plec1
+                                );
+                                ustawieniaLekarz.start(primaryStage);
+                            });
                         } catch (IOException ex) {
                             throw new RuntimeException(ex);
                         }
