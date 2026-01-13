@@ -26,7 +26,7 @@ public class mainPacPanel {
     private Label notificationLabel2 = new Label("Otrzymano nową ereceptę!");
 
     //Guziki z panelem z guziczkami
-    private Button wizyta = new Button("Umów wizytę");
+    private Button wizyta = new Button("Prośba o E-receptę");
     private Button historia = new Button("Historia wizyt");
     private Button nadchodzaceWizyty = new Button("Nadchodzace wizyty");
     private Button dawkowanie = new Button("Dawkowanie");
@@ -46,12 +46,13 @@ public class mainPacPanel {
 
         Label[] warningLabel = new Label[]{
                 warningTestLabel1,
-                warningTestLabel2
+                warningTestLabel2,
+                warningTestLabel1
         };
 
         Label[] notificationLabel = new Label[]{
                 notificationLabel1,
-                notificationLabel2
+                notificationLabel2,
         };
 
         /*
@@ -135,7 +136,7 @@ public class mainPacPanel {
         //Dodanie ładnego przycisksu nowej recepty
 
         VBox nowaReceptaBox = new VBox(10);
-        for (int i = 0; i < warningLabel.length; i++) {
+        for (int i = 0; i < notificationLabel.length; i++) {
             HBox nowaReceptaView = new HBox(10);
             nowaReceptaView.setMaxWidth(Double.MAX_VALUE);
             HBox.setHgrow(nowaReceptaView, Priority.ALWAYS);
@@ -160,6 +161,12 @@ public class mainPacPanel {
                 warningsBox,new Separator(),
                 nowaReceptaBox
         );
+
+        ScrollPane receptyScrollPane = new ScrollPane(receptyBox);
+        receptyScrollPane.setFitToWidth(true);
+        receptyScrollPane.setPrefHeight(300);
+        receptyScrollPane.setHbarPolicy(ScrollPane.ScrollBarPolicy.NEVER);
+        receptyScrollPane.setVbarPolicy(ScrollPane.ScrollBarPolicy.AS_NEEDED);
 
         //Dodanie środkowego panelu z guziczkami
         VBox mainButtonBox = new VBox();
@@ -264,7 +271,7 @@ public class mainPacPanel {
         root.setAlignment(Pos.TOP_CENTER);
         root.getChildren().addAll(
                 nameBox, new Separator(),
-                receptyBox, new Separator(),
+                receptyScrollPane, new Separator(),
                 mainButtonBox, new Separator(),
                 wylogujBox
         );
