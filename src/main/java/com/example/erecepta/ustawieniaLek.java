@@ -81,10 +81,10 @@ public class ustawieniaLek {
 
         ColumnConstraints col1 = new ColumnConstraints();
         col1.setHalignment(HPos.RIGHT);
-        col1.setPercentWidth(20);
+        col1.setPercentWidth(15);
         ColumnConstraints col2 = new ColumnConstraints();
         col2.setHalignment(HPos.LEFT);
-        col2.setPercentWidth(10);
+        col2.setPercentWidth(20);
         ColumnConstraints col3 = new ColumnConstraints();
         col3.setHalignment(HPos.RIGHT);
         col3.setPercentWidth(20);
