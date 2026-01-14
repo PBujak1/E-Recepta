@@ -190,4 +190,25 @@ public class ServerConnection {
             return "Brak danych" + e.getMessage();
         }
     }
+
+    public void getUpdate(String data, String PESEL) throws IOException {
+        try {
+            Socket socket = new Socket(server, port);
+            BufferedReader in = new BufferedReader(new InputStreamReader(socket.getInputStream()));
+            PrintWriter out = new PrintWriter(socket.getOutputStream(), true);
+
+            switch (data) {
+                case "updateWszystko":
+                    out.println(data);
+                    out.println(PESEL);
+
+                default:
+                    response = "Valid request!";
+                    System.out.println(response);
+            }
+
+        } catch (IOException e) {
+            System.out.println( "Brak danych" + e.getMessage());
+        }
+    }
 }
