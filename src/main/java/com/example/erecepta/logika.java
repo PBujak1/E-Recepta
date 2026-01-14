@@ -67,8 +67,8 @@ public class logika extends Application {
                                 new Alert(Alert.AlertType.WARNING, "Błędny login lub hasło").showAndWait();
                                 return;
                             } else {
-                            imie = serverConnection.getPacjent(getImie, PESEL);
-                            nazwisko = serverConnection.getPacjent(getNazwisko, PESEL);
+                            imie = serverConnection.getPacjent("getImiePacjent", PESEL);
+                            nazwisko = serverConnection.getPacjent("getNazwiskoPacjent", PESEL);
                             nazwaPacjenta = imie + " " + nazwisko;
                             mainPacPanel mainPanelPac = new mainPacPanel(imie, nazwisko, nazwaPacjenta);
                             mainPanelPac.start(primaryStage);
@@ -79,8 +79,10 @@ public class logika extends Application {
                         break;
                     case 2:
                         try {
-                            imie = serverConnection.getPacjent(getImie, PESEL);
-                            nazwisko = serverConnection.getPacjent(getNazwisko, PESEL);
+                            imie = serverConnection.getPacjent("getImieLekarz", PESEL);
+                            nazwisko = serverConnection.getPacjent("getNazwiskoLekarz", PESEL);
+                            String IDLekarza = serverConnection.getPacjent("getIDLekarza", PESEL);
+                            String recepta  = serverConnection.getPacjent("getRecepta", IDLekarza);
                             String adres1 = serverConnection.getPacjent("getAdres", PESEL);
                             String telefon1 = serverConnection.getPacjent("getTelefon", PESEL);
                             String email1 = serverConnection.getPacjent("getEmail", PESEL);
@@ -116,6 +118,12 @@ public class logika extends Application {
                                     mainPanelLek.start(primaryStage);
                                 });
                             });
+
+                            mainPanelLek.getMojeReceptaBtn().setOnAction(actionEvent -> {
+                               mojeRecepty mr = new mojeRecepty(recepta);
+                               mr.start(primaryStage);
+                            });
+
                         } catch (IOException ex) {
                             throw new RuntimeException(ex);
                         }

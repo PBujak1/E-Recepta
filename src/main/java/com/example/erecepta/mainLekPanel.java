@@ -79,7 +79,8 @@ public class mainLekPanel {
 
         nowaRecepta.setMaxWidth(Double.MAX_VALUE);
         historia.setMaxWidth(Double.MAX_VALUE);
-        mojeRecepty.setMaxWidth(Double.MAX_VALUE);;
+        mojeRecepty.setMaxWidth(Double.MAX_VALUE);
+        ;
         ustawienia.setMaxWidth(Double.MAX_VALUE);
         pomoc.setMaxWidth(Double.MAX_VALUE);
         wyloguj.setMaxWidth(Double.MAX_VALUE);
@@ -313,8 +314,8 @@ public class mainLekPanel {
         wczytajBtn.setOnAction(e -> {
             try {
                 String PESEL = searchField.getText();
-                String imie1 = serverConnection.getPacjent("getImie", PESEL);
-                String nazwisko1 = serverConnection.getPacjent("getNazwisko", PESEL);
+                String imie1 = serverConnection.getPacjent("getImiePacjent", PESEL);
+                String nazwisko1 = serverConnection.getPacjent("getNazwiskoPacjent", PESEL);
                 String adres1 = serverConnection.getPacjent("getAdres", PESEL);
                 String telefon1 = serverConnection.getPacjent("getTelefon", PESEL);
                 String email1 = serverConnection.getPacjent("getEmail", PESEL);
@@ -344,7 +345,7 @@ public class mainLekPanel {
         });
     }
 
-    public Button getPokazPac() { return wczytajBtn; }
+    public Button getMojeReceptaBtn() { return mojeRecepty; }
 
     public Button getUstawieniaLek() { return ustawienia; }
 

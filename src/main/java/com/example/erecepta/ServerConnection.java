@@ -13,6 +13,7 @@ public class ServerConnection {
     private String PESEL;
     private String haslo;
     private String response;
+    private String IDlekarza;
 
     public ServerConnection(String PESEL, String haslo) {
         this.PESEL = PESEL;
@@ -25,7 +26,7 @@ public class ServerConnection {
             BufferedReader in = new BufferedReader(new InputStreamReader(socket.getInputStream()));
             PrintWriter out = new PrintWriter(socket.getOutputStream(), true);
 
-            switch (data){
+            switch (data) {
                 case "loginPacjent":
                     out.println("loginPacjent");
                     out.println(PESEL);
@@ -41,14 +42,35 @@ public class ServerConnection {
                     String nazwisko = in.readLine();
 
                     return imie + " " + nazwisko;
-                case "getImie":
+                case "getImiePacjent":
                     out.println(data);
                     out.println(PESEL);
 
                     response = in.readLine();
                     System.out.println(response);
                     return response;
-                case "getNazwisko":
+                case "getNazwiskoPacjent":
+                    out.println(data);
+                    out.println(PESEL);
+
+                    response = in.readLine();
+                    System.out.println(response);
+                    return response;
+                case "getImieLekarz":
+                    out.println(data);
+                    out.println(PESEL);
+
+                    response = in.readLine();
+                    System.out.println(response);
+                    return response;
+                case "getNazwiskoLekarz":
+                    out.println(data);
+                    out.println(PESEL);
+
+                    response = in.readLine();
+                    System.out.println(response);
+                    return response;
+                case "getIDLekarza":
                     out.println(data);
                     out.println(PESEL);
 
@@ -88,6 +110,17 @@ public class ServerConnection {
                     out.println(PESEL);
 
                     response = in.readLine();
+                    System.out.println(response);
+                    return response;
+                case "getRecepta":
+                    out.println(data);
+                    out.println(PESEL);
+                    StringBuilder responseBuilder = new StringBuilder();
+
+                    while (!(response = in.readLine()).equals("END")) {
+                        responseBuilder.append(response).append("\n");
+                    }
+                    response = responseBuilder.toString();
                     System.out.println(response);
                     return response;
                 default:
