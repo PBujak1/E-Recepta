@@ -170,6 +170,17 @@ public class ServerConnection {
                     response = responseBuilder.toString();
                     System.out.println(response);
                     return response;
+                case "getHistoriaPac":
+                    out.println(data);
+                    out.println(PESEL);
+                    responseBuilder = new StringBuilder();
+
+                    while (!(response = in.readLine()).equals("END")) {
+                        responseBuilder.append(response).append("\n");
+                    }
+                    response = responseBuilder.toString();
+                    System.out.println(response);
+                    return response;
                 default:
                     response = "Valid request!";
                     System.out.println(response);

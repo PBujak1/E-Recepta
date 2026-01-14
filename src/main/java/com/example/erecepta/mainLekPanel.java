@@ -1,7 +1,6 @@
 package com.example.erecepta;
 
 import javafx.geometry.HPos;
-import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
@@ -57,6 +56,7 @@ public class mainLekPanel {
     private Label alergia3 = new Label("metylomeksatolina");
     private Label historiaTitle = new Label("Historia Recept Pacjenta:");
     private Button zobaczWszystko = new Button("Zobacz Wszystko");
+    private String historiaPacString;
 
     mainLekPanel(String login, String password, String imie, String nazwisko) {
         this.login = login;
@@ -274,11 +274,22 @@ public class mainLekPanel {
         zobaczWszystko.setMaxWidth(Double.MAX_VALUE);
         zobaczWszystko.getStyleClass().add("zobacz-wszystko");
 
+        VBox emptyPane = new VBox(new Label());
+        emptyPane.setAlignment(Pos.TOP_CENTER);
+
+        ScrollPane contentPane = new ScrollPane();
+        contentPane.setFitToWidth(true);
+        VBox.setVgrow(contentPane, Priority.ALWAYS);
+        contentPane.setMaxHeight(Double.MAX_VALUE);
+        contentPane.getStyleClass().add("main-panel-content");
+        contentPane.setContent(emptyPane);
+
         VBox rightPanel = new VBox(20);
         rightPanel.getChildren().addAll(
                 titleBoxP,
                 allergyList, new Separator(),
-                historyBox
+                historyBox,
+                contentPane
         );
         rightPanel.getStyleClass().add("right-panel");
         alergieTitle.getStyleClass().add("subtitle");
@@ -321,6 +332,7 @@ public class mainLekPanel {
                 String email1 = serverConnection.getPacjent("getEmail", PESEL);
                 String wiek1 = serverConnection.getPacjent("getWiek", PESEL);
                 String plec1 = serverConnection.getPacjent("getPlec", PESEL);
+                historiaPacString = serverConnection.getPacjent("getHistoriaPac", PESEL);
 
                 imieINazwiskoPacjenta.setText(imie1 + " " + nazwisko1);
                 PESELPacjenta.setText(PESEL);
@@ -338,6 +350,14 @@ public class mainLekPanel {
                         mainLekPanel mainPanelLek = new mainLekPanel(login, password, imie, nazwisko);
                         mainPanelLek.start(primaryStage);
                     });
+                });
+
+                zobaczWszystko.setOnAction(a -> {
+                    System.out.println(historiaPacString);
+                    VBox historiaPane = new VBox(new Label(historiaPacString));
+                    historiaPane.setAlignment(Pos.TOP_CENTER);
+
+                    contentPane.setContent(historiaPane);
                 });
             } catch (IOException ex) {
                 throw new RuntimeException(ex);
