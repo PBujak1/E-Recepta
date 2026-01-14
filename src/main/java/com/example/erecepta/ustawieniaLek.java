@@ -10,11 +10,15 @@ import javafx.scene.control.TextField;
 import javafx.scene.layout.*;
 import javafx.stage.Stage;
 
+import java.io.IOException;
+
 public class ustawieniaLek {
 
     private Label imie;
     private Label nazwisko;
     private Label PESEL;
+    private String PESELString;
+    private String nazwiskoString;
     private Label adres;
     private Label telefon;
     private Label email;
@@ -47,6 +51,15 @@ public class ustawieniaLek {
     private TextField wiekField = new TextField();
     private TextField plecField = new TextField();
 
+    private String noweImie;
+    private String noweNazwisko;
+    private String nowyPesel;
+    private String nowyAdres;
+    private String nowyTelefon;
+    private String nowyEmail;
+    private String nowyWiek;
+    private String nowaPlec;
+
     private Button wyjdz = new Button("Wyjdz");
     private Button akceptuj = new Button("Akceptuj");
 
@@ -56,6 +69,8 @@ public class ustawieniaLek {
         this.imie = new Label(imie);
         this.nazwisko = new Label(nazwisko);
         this.PESEL = new Label(PESEL);
+        this.PESELString = PESEL;
+        this.nazwiskoString = nazwisko;
         this.adres = new Label(adres);
         this.telefon = new Label(telefon);
         this.email = new Label(email);
@@ -157,6 +172,24 @@ public class ustawieniaLek {
         primaryStage.setTitle("E-Recepta");
         primaryStage.setScene(scene);
         primaryStage.show();
+
+        akceptuj.setOnAction(event -> {
+            noweImie = noweImieLabel.getText();
+            noweNazwisko = noweNazwiskoLabel.getText();
+            nowyPesel = nowyPeselLabel.getText();
+            nowyAdres = nowyAdresLabel.getText();
+            nowyTelefon = nowyTelefonLabel.getText();
+            nowyEmail = nowyEmailLabel.getText();
+            nowyWiek = nowyWiekLabel.getText();
+            nowaPlec = nowaPlecLabel.getText();
+
+            ServerConnection serverConnection = new ServerConnection(PESELString, nazwiskoString);
+            try {
+                serverConnection.getUpdate("updateWszystko", PESELString);
+            } catch (IOException e) {
+                throw new RuntimeException(e);
+            }
+        });
     }
 
     public Button getWyjdzBtn() {return wyjdz;}
