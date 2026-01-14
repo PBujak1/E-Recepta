@@ -17,7 +17,7 @@ public class mojeRecepty {
     private String receptyString;
     private Label titleLabel = new Label("Moje Recepty");
     private Label informationLabel = new Label("Ze względu na rodo wszystkie dane zapisane są za pomocą ID");
-    private Label daneLabel = new Label("Dane pokazują poszczególno IDRecepty, IDLekarza, IDPacjenta, Ilość opakowań danego leku");
+    private Label daneLabel = new Label("Dane pokazują poszczególno IDRecepty, Nazwa Leku, IDPacjenta, Ilość opakowań danego leku");
     private Button wyjdz = new Button("Wyjdź");
 
     mojeRecepty(String recepty) {
