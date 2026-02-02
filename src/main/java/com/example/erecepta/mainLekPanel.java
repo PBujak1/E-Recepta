@@ -28,6 +28,7 @@ public class mainLekPanel {
 
     //Zmienne środkowego panelu
     private Label title = new Label("Wystawianie E-Recepty");
+    private Label karta = new Label("Karta Pacjenta");
     private Label imieINazwiskoLabel = new Label("Imię i nazwisko:");
     private Label imieINazwiskoPacjenta = new Label("");
     private Label plecLabel = new Label("Płeć:");
@@ -121,10 +122,19 @@ public class mainLekPanel {
                 title
         );
 
-        Label searchIcon = new Label("\uD83D\uDD0D"); // 🔍
-        searchIcon.getStyleClass().add("search-icon");
-        Label searchIcon2 = new Label("\uD83D\uDD0D"); // 🔍
-        searchIcon2.getStyleClass().add("search-icon2");
+        Image searchImage = new Image(
+                getClass().getResourceAsStream("/icons/search.png")
+        );
+
+        ImageView searchIcon = new ImageView(searchImage);
+        searchIcon.setFitWidth(20);
+        searchIcon.setFitHeight(20);
+        searchIcon.setPreserveRatio(true);
+
+        ImageView searchIcon2 = new ImageView(searchImage);
+        searchIcon2.setFitWidth(20);
+        searchIcon2.setFitHeight(20);
+        searchIcon2.setPreserveRatio(true);
 
         HBox searchBox1 = new HBox(8);
         searchField.setPromptText("Wyszukaj Pacjenta (PESEL):");
@@ -144,31 +154,42 @@ public class mainLekPanel {
         );
 
         /* Dane pacjenta */
+        VBox titleMiddle = new VBox(10);
+        titleMiddle.setAlignment(Pos.CENTER);
+
         GridPane danePacjenta = new GridPane();
+        danePacjenta.setVgap(10);
         ColumnConstraints col1 = new ColumnConstraints();
         col1.setHalignment(HPos.RIGHT);
-        col1.setPercentWidth(25);
-        col1.setHalignment(HPos.RIGHT);
+        col1.setPercentWidth(15);
         ColumnConstraints col2 = new ColumnConstraints();
-        col2.setHgrow(Priority.ALWAYS);
-        col2.setFillWidth(true);
+        col2.setHalignment(HPos.LEFT);
+        col2.setPercentWidth(30);
+        ColumnConstraints col3 = new ColumnConstraints();
+        col3.setHalignment(HPos.RIGHT);
+        col3.setPercentWidth(15);
+        ColumnConstraints col4 = new ColumnConstraints();
+        col3.setHalignment(HPos.RIGHT);
+        col4.setHgrow(Priority.ALWAYS);
+        col4.setFillWidth(true);
 
         danePacjenta.getColumnConstraints().addAll(col1, col2);
-        danePacjenta.add(imieINazwiskoLabel, 0, 0);
-        danePacjenta.add(imieINazwiskoPacjenta, 1, 0);
         danePacjenta.add(PESELLabel, 0, 1);
         danePacjenta.add(PESELPacjenta, 1, 1);
-        danePacjenta.add(plecLabel, 0, 2);
-        danePacjenta.add(plec, 1, 2);
-        danePacjenta.add(wiekLabel, 0, 3);
-        danePacjenta.add(wiek, 1, 3);
-        danePacjenta.add(adresLabel, 0, 4);
-        danePacjenta.add(adresPacjenta, 1, 4);
-        danePacjenta.add(telefonLabel, 0, 5);
-        danePacjenta.add(telefon, 1, 5);
-        danePacjenta.add(emailLabel, 0, 6);
-        danePacjenta.add(email, 1, 6);
+        danePacjenta.add(plecLabel, 2, 1);
+        danePacjenta.add(plec, 3, 1);
+        danePacjenta.add(wiekLabel, 0, 2);
+        danePacjenta.add(wiek, 1, 2);
+        danePacjenta.add(adresLabel, 2, 2);
+        danePacjenta.add(adresPacjenta, 3, 2);
 
+        titleMiddle.getChildren().addAll(
+                karta,
+                imieINazwiskoPacjenta,
+                danePacjenta
+        );
+
+        //Środkowy panel wyszukiwanie leku
         HBox searchBox2 = new HBox(8);
         lekField.setPromptText("Wyszukaj lek...");
         searchBox2.getChildren().addAll(searchIcon2, lekField);
@@ -186,6 +207,7 @@ public class mainLekPanel {
                 dodajLekBtn
         );
 
+        titleMiddle.getStyleClass().add("title-middle");
         centerPanel.getStyleClass().add("center-panel");
         title.getStyleClass().add("center-title");
         wczytajBtn.getStyleClass().add("blue-btn");
@@ -204,7 +226,7 @@ public class mainLekPanel {
         centerPanel.getChildren().addAll(
                 titleBox,
                 topBox, new Separator(),
-                danePacjenta, new Separator(),
+                titleMiddle, new Separator(),
                 typReceptyLabel,
                 botoomBox, new Separator(),
                 bottomBtn

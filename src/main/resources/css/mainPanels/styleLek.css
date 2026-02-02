@@ -42,7 +42,19 @@
     -fx-padding: 25;
 }
 
-.center-panel .dane-pacjenta {
+.center-panel .title-middle {
+    -fx-background-color: white;
+    -fx-background-radius: 15;
+    -fx-padding: 20;
+    -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.25), 15, 0, 0, 5);
+}
+
+.center-panel .title-middle .label{
+    -fx-font-size: 30;
+    -fx-font-weight: bold;
+}
+
+.center-panel .dane-pacjenta .label{
     -fx-font-size: 18px;
     -fx-font-weight: bold;
     -fx-vgap: 10;
@@ -77,6 +89,8 @@
     -fx-border-color: #64748B;
 }
 
+/*wyszukiwanie pacjenta i leku napisy*/
+
 .search-box, .search-box2 {
     -fx-background-color: white;
     -fx-border-color: #CBD5E1;
@@ -95,7 +109,7 @@
     -fx-background-color: transparent;
     -fx-border-color: transparent;
     -fx-text-fill: #0F172A;
-    -fx-prompt-text-fill: #94A3B8;
+    -fx-prompt-text-fill: black;
     -fx-font-size: 14px;
     -fx-padding: 6 0 6 0;
 }
@@ -116,6 +130,8 @@
     -fx-background-color: #3498DB;
     -fx-border-color: #64748B;
 }
+
+
 
 /* PANEL PRAWY */
 .right-panel {
