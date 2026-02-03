@@ -221,6 +221,7 @@ public class mainLekPanel {
         bottomBtn.setAlignment(Pos.CENTER);
         VBox.setVgrow(bottomBtn, Priority.ALWAYS);
         bottomBtn.getChildren().addAll(wypiszBtn);
+        bottomBtn.getStyleClass().add("bottom-btn");
         wypiszBtn.getStyleClass().add("wypisz-recepte");
 
         centerPanel.getChildren().addAll(
