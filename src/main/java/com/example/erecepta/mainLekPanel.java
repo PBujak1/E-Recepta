@@ -275,6 +275,11 @@ public class mainLekPanel {
         VBox allergyList = new VBox(12);
         allergyList.getStyleClass().add("allergy-container");
 
+        ScrollPane contentPane2 = new ScrollPane(allergyList);
+        contentPane2.setFitToWidth(true);
+        contentPane2.setMaxHeight(Double.MAX_VALUE);
+        contentPane2.getStyleClass().add("main-panel-content");
+
         VBox historyBox = new VBox(12);
         historyBox.setAlignment(Pos.CENTER);
         historyBox.getChildren().addAll(historiaTitle, zobaczWszystko);
@@ -295,7 +300,7 @@ public class mainLekPanel {
         VBox rightPanel = new VBox(20);
         rightPanel.getChildren().addAll(
                 titleBoxP,
-                allergyList, new Separator(),
+                contentPane2, new Separator(),
                 historyBox,
                 contentPane
         );
